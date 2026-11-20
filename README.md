@@ -55,11 +55,23 @@ with U+FE0E and U+FE0F removed, once they have been read to pick text or emoji p
 
 ```sh
 ./fetch.sh                                  # the SVG of fluentui-emoji and flag-icons at the commits of UPSTREAM.txt
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+python3 -m venv .venv && .venv/bin/pip install --require-hashes --no-deps -r requirements.lock
 .venv/bin/python build.py                   # dist/CarboneEmoji-Color.ttf, dist/CarboneEmoji-Mono.ttf
 ```
 
 The build takes about fifteen minutes. The version of the fonts is in `VERSION`.
+
+`requirements.lock` pins every package the build installs, its dependencies included, with
+the hash of each file, for Python 3.14; `requirements.txt` lists the packages it is compiled
+from. After changing the latter:
+
+```sh
+.venv/bin/pip install pip-tools
+.venv/bin/pip-compile --generate-hashes --allow-unsafe --strip-extras --output-file requirements.lock requirements.txt
+```
+
+The actions of the workflow are pinned to the commits of their releases, the tag stated
+beside each one.
 
 ## License
 
