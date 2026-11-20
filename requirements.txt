@@ -1,0 +1,4 @@
+nanoemoji==0.16.0
+picosvg==0.23.0
+fonttools==4.68.0
+skia-pathops==0.9.2

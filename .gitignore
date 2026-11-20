@@ -1,0 +1,6 @@
+.venv/
+upstream/
+build/
+build.log
+dist/
+__pycache__/
